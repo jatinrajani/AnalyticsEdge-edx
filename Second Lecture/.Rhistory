@@ -1,0 +1,51 @@
+rm(list=ls(all=TRUE)) 
+load("~/Mitedx/.RData")
+load("~/Mitedx/.RData")
+setwd("~/Mitedx/Second Lecture")
+USDA=read.csv("USDA.csv")
+str(USDA)
+view(USDA
+)
+view(USDA)
+View(USDA)
+View(USDA)
+summary(USDA)
+USDA$Sodium
+which.max(USDA$Sodium)
+names(USDA)
+USDA$Sodium[265]
+USDA$Description[265]
+HighSodium=subset(USDA,Sodium>10000)
+nrow(HighSodium)
+HighSodium$Description
+match("CAVIAR,USDA$Description")
+match("CAVIAR",USDA$Description")
+match("CAVIAR","USDA$Description")
+match("CAVIAR","USDA$Description")
+match("CAVIAR",USDA$Description)
+USDA$Sodium[4154]
+USDA$Sodium[match("CAVIAR",USDA$Description)
+]
+summary(USDA$Sodium)
+sd(USDA$Sodium,na.rm=TRUE)
+plot(USDA$Protein,USDA$TotalFat)
+plot(USDA$Protein,USDA$TotalFat,xlab ="Protein",ylab="Fat",main="FAT vs PROTEIN",color="RED")
+plot(USDA$Protein,USDA$TotalFat,xlab ="Protein",ylab="Fat",main="FAT vs PROTEIN",col="RED")
+hist(USDA$VitaminC)
+hist(USDA$VitaminC,xlim=c(0,100))
+hist(USDA$VitaminC,xlim=c(0,100),xlab="Vitamin c",main="Histogram of Vitamin C levels")
+hist(USDA$VitaminC,xlim=c(0,100),break=1000)
+hist(USDA$VitaminC,xlim=c(0,100),breaks=1000)
+boxplot(USDA$Sugar,ylab="Sugar(g)",main="Sugar plots")
+HighSodium=USDA$Sodium>mean(USDA$Sodium,na.rm=TRUE)
+HighSodium
+USDA$HighSodium=as.numeric(USDA$Sodium>mean(USDA$Sodium))
+USDA$HighSodium=as.numeric(USDA$Sodium>mean(USDA$Sodium),na.rm=TRUE
+)
+USDA$HighSodium=as.numeric(USDA$Sodium>mean(USDA$Sodium),na.rm=TRUE)
+USDA$HighProtein=as.numeric(USDA$Protein>mean(USDA$Protein),na.rm=TRUE)
+USDA$HighProtein=as.numeric(USDA$Protein>mean(USDA$Protein,na.rm=TRUE))
+USDA$HighSodium=as.numeric(USDA$Sodium>mean(USDA$Sodium,na.rm=TRUE))
+table(USDA$HighSodium)
+table(USDA$HighSodium,USDA$HighProtein)
+tapply(USDA$HighSodium,USDA$HighProtein,mean,na.rm=TRUE)
