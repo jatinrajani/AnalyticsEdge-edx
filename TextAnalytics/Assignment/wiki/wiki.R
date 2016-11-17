@@ -1,0 +1,103 @@
+
+setwd("~/AnalyticsEdge-edx/TextAnalytics/Assignment")
+wiki=read.csv("wiki.csv",stringsAsFactors = FALSE)
+wiki$Vandal=as.factor(wiki$Vandal)
+table(wiki$Vandal)
+corpusadded=Corpus(VectorSource(wiki$Vandal))
+library(tm)
+library(SnowballC)
+corpusadded=Corpus(VectorSource(wiki$Vandal))
+corpusadded=tm_map(corpusadded,PlainTextDocument)
+corpusadded=tm_map(corpusadded,removeWords,sw)
+corpusadded=Corpus(VectorSource(wiki$Added))
+corpusadded=tm_map(corpusadded,removeWords,stopwords("english"))
+corpusadded=tm_map(corpusadded,stemDocument)
+dtmadded=DocumentTermMatrix(corpusadded)
+dtmadded
+sparseadded=removeSparseTerms(corpusadded,0.97)
+sparseadded=removeSparseTerms(dtmadded,0.97)
+sparseadded
+sparseadded=removeSparseTerms(dtmadded,0.997)
+sparseadded
+wordsadded=as.data.frame(as.matrix(sparseadded))
+colnames(wordsadded)
+colnames(wordsadded)=paste("A",colnames(wordsadded))
+corpusremoved=Corpus(VectorSource(wiki$Removed))
+corpusremoved=tm_map(corpusremoved,PlainTextDocument)
+corpusremoved=tm_map(corpusremoved,removeWords,stopwords("english"))
+corpusremoved=tm_map(corpusremoved,stemDocument)
+dtmremoved=DocumentTermMatrix(corpusremoved)
+dtmremoved
+sparseremoved=removeSparseTerms(dtmremoved,0.997)
+colremoved=as.data.frame(as.matrix(sparseremoved))
+colremoved
+wordsremoved=as.data.frame(as.matrix(sparseremoved))
+col(wordsremoved)
+sparseremoved
+colnames(wordsremoved)
+colnames(wordsremoved)=paste("R",colnames(wordsremoved))
+Corpus?
+;.
+wikiwords=cbind(wordsadded,wordsremoved)
+wikiwords$Vandal=wiki$Vandal
+library(caTools)
+set.seed(123)
+split=sample.split(wikiwords$Vandal,0.7)
+train=subset(wikiwords,split==TRUE)
+test=subset(wikiwords,split==FALSE)
+table(test$Vandal)
+(618)/(618 +545 )
+library(rpart)
+library(rpart.plot)
+View(wordsadded)
+vandalcart=rpart(vandal ~.,data=train,method="class")
+vandalcart=rpart(Vandal ~.,data=train,method="class")
+pred=prediction(vandalcart,newdata=test)
+pred=predict(vandalcart,newdata=test)
+pred[1:10,]
+pred.prob=pred[,2]
+table(test$Vandal,pred.prob>=0.5)
+(618 +12)/( 618 +12+533)
+prp(vandalcart)
+wikiwords2=wikiwords
+wikiWords2$HTTP = ifelse(grepl("http",wiki$Added,fixed=TRUE), 1, 0)
+wikiwords2$HTTP = ifelse(grepl("http",wiki$Added,fixed=TRUE), 1, 0)
+table(wikiwords2$HTTP
+)
+wikiTrain2 = subset(wikiwords2, split==TRUE)
+wikiTest2 = subset(wikiwords2, split==FALSE)
+vandalcart2=rpart(reponsive ~.,data=wikiTrain2,method = "class")
+vandalcart2=rpart(Vandal ~.,data=wikiTrain2,method = "class")
+pred2=predict(vandalcart2,newdata=wikiTest2)
+table(wikiTest2$Vandal,pred2)
+pred2=predict(vandalcart2,newdata=wikiTest2,method="class")
+table(wikiTest2$Vandal,pred2)
+pred2=predict(vandalcart2,newdata=wikiTest2,type ="class")
+table(wikiTest2$Vandal,pred2)
+( 609+57)/( 609 +9+488+57)
+wikiwords2$Added=rowSums(as.matrix(dtmadded))
+wikiwords2$Removed=rowSums(as.matrix(dtmremoved))
+wikiwords2$Removed
+summary(wikiwords2$Added)
+wikiwords2$Added
+mean(wikiwords2$Added)
+wikiword2train=subset(wikiword2,0.7)
+wikiword2train=subset(wikiwords2,0.7)
+wikiword2train=subset(wikiwords2,split==TRUE)
+wikiword2test=subset(wikiwords2,split==FALSE)
+wikivandal2=rpart(Vandal ~.,data=wikiword2train,method="class")
+predictor2=predict(wikivandal2,newdata=wikiword2test,type="class")
+table(wikiword2test$Vandal,predictor2)
+(514+248)/(514+104+297+248)
+wikiwords3=wikiwords2
+wikiwords3$Minor=wiki$Minor
+wikiwords3$Loggedin=wiki$Loggedin
+wikiword3train=subset(wikiwords3,split==TRUE)
+wikiword3test=subset(wikiwords3,split==FALSE)
+vandalcart3=rpart(Vandal ~.,data=wikiword3train,method="class")
+prediction=predict(vandalcart3,newdata="wikiword3test",type="class")
+prediction=predict(vandalcart3,newdata=wikiword3test,type="class")
+table(wikiword3test$Vandal,prediction)
+(595+241)/(595+241+23+304)
+prp(vandalcart3)
+prp(vandalcart2)

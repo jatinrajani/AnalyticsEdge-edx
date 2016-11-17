@@ -1,6 +1,6 @@
 
 trials = read.csv("clinical_trial.csv", stringsAsFactors=FALSE)
-sum(nchar(trials$abstract) == 0),
+
 sum(nchar(trials$abstract) == 0)
 which.min(nchar(trials$title))
 trials$title[1258]
